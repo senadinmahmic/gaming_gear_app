@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gaming_gear_app/data/custom_cards_list.dart';
+import 'package:gaming_gear_app/modules/widgets/custom_card_item.dart';
 import 'package:gaming_gear_app/modules/widgets/custom_elevated_button2.dart';
 import 'package:get/get.dart';
 
@@ -18,14 +20,15 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (!controller.itemSelected.value) {
-        return _buildFirstScreen();
+        return _buildFirstScreen(context);
       } else {
         return _buildSecondScreen();
       }
     });
   }
 
-  Widget _buildFirstScreen() {
+  Widget _buildFirstScreen(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.transparent,
       body: BackgroundContainer(
@@ -35,107 +38,122 @@ class HomeView extends GetView<HomeController> {
           child: Stack(
             children: [
               const BackgroundSideContainer(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 8, vertical: 22),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 40,
+              SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        22,
+                        22,
+                        22,
+                        0,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 20,
-                        ),
+                      child: Row(
+                        children: [
+                          CustomElevatedButton1(
+                            boxShadow: BoxShadow(
+                              color: Colors.white12,
+                              blurRadius: 14,
+                              spreadRadius: 0.5,
+                              offset: Offset(
+                                -5,
+                                -5,
+                              ),
+                            ),
+                            icon: Icons.menu,
+                          ),
+                          Spacer(),
+                          CustomElevatedButton1(
+                            boxShadow: BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 14,
+                              spreadRadius: 0.5,
+                              offset: Offset(
+                                6,
+                                6,
+                              ),
+                            ),
+                            icon: Icons.shopping_cart_outlined,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    const HomeText(),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                      ),
+                      child: SingleChildScrollView(
                         child: Row(
                           children: [
-                            CustomElevatedButton1(
-                              boxShadow: BoxShadow(
-                                color: Colors.white12,
-                                blurRadius: 14,
-                                spreadRadius: 0.5,
-                                offset: Offset(
-                                  -5,
-                                  -5,
-                                ),
+                            IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.layers_outlined,
+                                size: 30,
+                                color: Colors.white,
                               ),
-                              icon: Icons.menu,
                             ),
-                            Spacer(),
-                            CustomElevatedButton1(
+                            const SizedBox(width: 16),
+                            const CustomElevatedButton2(
                               boxShadow: BoxShadow(
-                                color: Colors.black54,
+                                color: AppColors.secondary1,
                                 blurRadius: 14,
-                                spreadRadius: 0.5,
+                                spreadRadius: 0.8,
                                 offset: Offset(
-                                  6,
-                                  6,
+                                  0,
+                                  0,
                                 ),
                               ),
-                              icon: Icons.shopping_cart_outlined,
+                              gradientColor1: AppColors.secondary1,
+                              gradientColor2: AppColors.secondary2,
+                              icon: Icons.games_outlined,
+                            ),
+                            const SizedBox(width: 16),
+                            const CustomElevatedButton2(
+                              gradientColor1: AppColors.cardPrimary1,
+                              gradientColor2: AppColors.cardPrimary2,
+                              icon: Icons.keyboard_outlined,
+                            ),
+                            const SizedBox(width: 16),
+                            const CustomElevatedButton2(
+                              gradientColor1: AppColors.cardPrimary1,
+                              gradientColor2: AppColors.cardPrimary2,
+                              icon: Icons.mouse_outlined,
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 40,
+                    ),
+                    SizedBox(
+                      height: screenSize.height * 0.05,
+                    ),
+                    SizedBox(
+                      height: screenSize.height * 0.33,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: customCardsList.length,
+                        itemBuilder: (context, index) {
+                          return CustomCardItem(
+                            title: customCardsList[index].title,
+                            subtitle: customCardsList[index].subtitle,
+                            image: customCardsList[index].image,
+                          );
+                        },
                       ),
-                      const HomeText(),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 0,
-                        ),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.layers_outlined,
-                                  size: 30,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              const CustomElevatedButton2(
-                                boxShadow: BoxShadow(
-                                  color: AppColors.secondary1,
-                                  blurRadius: 14,
-                                  spreadRadius: 0.8,
-                                  offset: Offset(
-                                    0,
-                                    0,
-                                  ),
-                                ),
-                                gradientColor1: AppColors.secondary1,
-                                gradientColor2: AppColors.secondary2,
-                                icon: Icons.games_outlined,
-                              ),
-                              const SizedBox(width: 16),
-                              const CustomElevatedButton2(
-                                gradientColor1: AppColors.cardPrimary1,
-                                gradientColor2: AppColors.cardPrimary2,
-                                icon: Icons.keyboard_outlined,
-                              ),
-                              const SizedBox(width: 16),
-                              const CustomElevatedButton2(
-                                gradientColor1: AppColors.cardPrimary1,
-                                gradientColor2: AppColors.cardPrimary2,
-                                icon: Icons.mouse_outlined,
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               )
             ],

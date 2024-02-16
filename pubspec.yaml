@@ -22,3 +22,7 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+  fonts:
+    - family: ArialicHollow
+      fonts:
+        - asset: assets/fonts/arialic_hollow.ttf

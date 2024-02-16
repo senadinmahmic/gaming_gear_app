@@ -21,7 +21,7 @@ class BackgroundSideContainer extends GetView<HomeController> {
           child: AnimatedContainer(
             width: !itemSelected ? screenSize.width * 0.42 : screenSize.width,
             height: !itemSelected
-                ? screenSize.height * 0.8
+                ? screenSize.height * 0.9
                 : screenSize.height * 0.45,
             duration: const Duration(milliseconds: 500),
             decoration: BoxDecoration(
@@ -39,7 +39,7 @@ class BackgroundSideContainer extends GetView<HomeController> {
             ),
             child: !itemSelected
                 ? const FittedBox(
-                    alignment: Alignment.centerRight,
+                    alignment: Alignment.topRight,
                     child: RotatedBox(
                       quarterTurns: 1,
                       child: Opacity(
@@ -47,9 +47,9 @@ class BackgroundSideContainer extends GetView<HomeController> {
                         child: Text(
                           'GAMING GEAR',
                           style: TextStyle(
-                            color: AppColors.textWhite,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              color: AppColors.textWhite,
+                              fontWeight: FontWeight.bold,
+                              height: 0.8),
                         ),
                       ),
                     ),

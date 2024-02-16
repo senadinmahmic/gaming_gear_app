@@ -1,17 +1,11 @@
-import 'package:flutter/material.dart';
+class CustomCardModel {
+  final String image;
+  final String title;
+  final String subtitle;
 
-class CustomCardModel extends StatelessWidget {
-  const CustomCardModel({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-    );
-  }
+  CustomCardModel({
+    required this.image,
+    required this.title,
+    required this.subtitle,
+  });
 }

@@ -18,13 +18,14 @@ class CustomElevatedButton2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
     return Material(
       elevation: 4,
       borderRadius: BorderRadius.circular(26),
       color: AppColors.transparent,
       child: Container(
-        height: 70,
-        width: 70,
+        height: screenSize.height < 800 ? 60 : 70,
+        width: screenSize.height < 800 ? 60 : 70,
         decoration: BoxDecoration(
           boxShadow: boxShadow != null ? [boxShadow!] : null,
           gradient: LinearGradient(
@@ -35,7 +36,8 @@ class CustomElevatedButton2 extends StatelessWidget {
               gradientColor2,
             ],
           ),
-          borderRadius: BorderRadius.circular(26),
+          borderRadius:
+              BorderRadius.circular(screenSize.height < 800 ? 22 : 26),
         ),
         child: Icon(
           icon,
