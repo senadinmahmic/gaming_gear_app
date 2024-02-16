@@ -19,6 +19,7 @@ class AppPages {
       name: Routes.ITEMDETAILS,
       page: () => const ItemDetailsView(),
       binding: ItemDetailsBindings(),
+      transitionDuration: const Duration(milliseconds: 1000),
     ),
   ];
 }

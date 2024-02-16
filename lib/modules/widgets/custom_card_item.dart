@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:gaming_gear_app/config/app_colors.dart';
+import 'package:gaming_gear_app/modules/home/controllers/home_controller.dart';
+import 'package:get/get.dart';
 
 class DiagonalClipper extends CustomClipper<Path> {
   @override
@@ -8,7 +10,7 @@ class DiagonalClipper extends CustomClipper<Path> {
     var path = Path();
     var radius = 20.0; // Adjust this to change the border radius
 
-    path.moveTo(0, 70);
+    path.moveTo(0, 60);
     path.lineTo(0, size.height - radius);
     path.quadraticBezierTo(0, size.height, radius, size.height);
     path.lineTo(size.width - radius, size.height);
@@ -16,8 +18,8 @@ class DiagonalClipper extends CustomClipper<Path> {
         size.width, size.height, size.width, size.height - radius);
     path.lineTo(size.width, radius);
     path.quadraticBezierTo(size.width, 0, size.width - radius, 0);
-    path.lineTo(radius, 47);
-    path.quadraticBezierTo(0, 50, 0, 70);
+    path.lineTo(radius, 37);
+    path.quadraticBezierTo(0, 40, 0, 60);
     path.close();
     return path;
   }
@@ -26,16 +28,18 @@ class DiagonalClipper extends CustomClipper<Path> {
   bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
 
-class CustomCardItem extends StatelessWidget {
+class CustomCardItem extends GetView<HomeController> {
   final String image;
   final String title;
   final String subtitle;
+  final int index;
 
   const CustomCardItem({
     super.key,
     required this.image,
     required this.title,
     required this.subtitle,
+    required this.index,
   });
 
   @override
@@ -98,7 +102,8 @@ class CustomCardItem extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(18.0),
-                    child: Expanded(
+                    child: Hero(
+                      tag: 'item$index',
                       child: Image.asset(
                         image,
                       ),

@@ -32,9 +32,8 @@ class HomeText extends StatelessWidget {
                   style: TextStyle(
                       color: AppColors.textWhite,
                       fontSize: 20,
-                      fontWeight: FontWeight.normal,
                       height: 1,
-                      fontFamily: 'ArialicHollow'),
+                      fontFamily: 'NostromoOutline'),
                 ),
               ],
             ),

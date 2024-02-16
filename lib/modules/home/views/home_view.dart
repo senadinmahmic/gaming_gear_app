@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gaming_gear_app/data/custom_cards_list.dart';
-import 'package:gaming_gear_app/modules/widgets/custom_card_item.dart';
-import 'package:gaming_gear_app/modules/widgets/custom_elevated_button2.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gaming_gear_app/routes/app_routes.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
@@ -10,6 +9,10 @@ import 'package:gaming_gear_app/modules/widgets/custom_elevated_button1.dart';
 import 'package:gaming_gear_app/modules/widgets/home_text.dart';
 import 'package:gaming_gear_app/modules/widgets/background_container.dart';
 import 'package:gaming_gear_app/modules/widgets/background_side_container.dart';
+import 'package:gaming_gear_app/data/custom_cards_list.dart';
+import 'package:gaming_gear_app/modules/widgets/custom_card_item.dart';
+import 'package:gaming_gear_app/modules/widgets/custom_elevated_button2.dart';
+import 'package:gaming_gear_app/config/app_icons.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({
@@ -18,16 +21,6 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      if (!controller.itemSelected.value) {
-        return _buildFirstScreen(context);
-      } else {
-        return _buildSecondScreen();
-      }
-    });
-  }
-
-  Widget _buildFirstScreen(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.transparent,
@@ -37,7 +30,14 @@ class HomeView extends GetView<HomeController> {
           height: double.infinity,
           child: Stack(
             children: [
-              const BackgroundSideContainer(),
+              const Align(
+                alignment: Alignment.topRight,
+                child: BackgroundSideContainer(
+                  width: 0.42,
+                  height: 0.9,
+                  radius: 40,
+                ),
+              ),
               SizedBox(
                 width: double.infinity,
                 height: double.infinity,
@@ -56,6 +56,7 @@ class HomeView extends GetView<HomeController> {
                       child: Row(
                         children: [
                           CustomElevatedButton1(
+                            padding: EdgeInsets.all(20),
                             boxShadow: BoxShadow(
                               color: Colors.white12,
                               blurRadius: 14,
@@ -65,10 +66,11 @@ class HomeView extends GetView<HomeController> {
                                 -5,
                               ),
                             ),
-                            icon: Icons.menu,
+                            icon: menuIcon,
                           ),
                           Spacer(),
                           CustomElevatedButton1(
+                            padding: EdgeInsets.all(18),
                             boxShadow: BoxShadow(
                               color: Colors.black54,
                               blurRadius: 14,
@@ -78,7 +80,7 @@ class HomeView extends GetView<HomeController> {
                                 6,
                               ),
                             ),
-                            icon: Icons.shopping_cart_outlined,
+                            icon: cartIcon,
                           ),
                         ],
                       ),
@@ -99,10 +101,14 @@ class HomeView extends GetView<HomeController> {
                           children: [
                             IconButton(
                               onPressed: () {},
-                              icon: const Icon(
-                                Icons.layers_outlined,
-                                size: 30,
-                                color: Colors.white,
+                              icon: SvgPicture.asset(
+                                layerIcon,
+                                colorFilter: ColorFilter.mode(
+                                  AppColors.textGrey300!,
+                                  BlendMode.srcIn,
+                                ),
+                                width: 23,
+                                height: 23,
                               ),
                             ),
                             const SizedBox(width: 16),
@@ -118,19 +124,19 @@ class HomeView extends GetView<HomeController> {
                               ),
                               gradientColor1: AppColors.secondary1,
                               gradientColor2: AppColors.secondary2,
-                              icon: Icons.games_outlined,
+                              icon: joystickIcon,
                             ),
                             const SizedBox(width: 16),
                             const CustomElevatedButton2(
                               gradientColor1: AppColors.cardPrimary1,
                               gradientColor2: AppColors.cardPrimary2,
-                              icon: Icons.keyboard_outlined,
+                              icon: nintendoIcon,
                             ),
                             const SizedBox(width: 16),
                             const CustomElevatedButton2(
                               gradientColor1: AppColors.cardPrimary1,
                               gradientColor2: AppColors.cardPrimary2,
-                              icon: Icons.mouse_outlined,
+                              icon: mouseIcon,
                             ),
                           ],
                         ),
@@ -145,10 +151,19 @@ class HomeView extends GetView<HomeController> {
                         scrollDirection: Axis.horizontal,
                         itemCount: customCardsList.length,
                         itemBuilder: (context, index) {
-                          return CustomCardItem(
-                            title: customCardsList[index].title,
-                            subtitle: customCardsList[index].subtitle,
-                            image: customCardsList[index].image,
+                          return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(
+                                Routes.ITEMDETAILS,
+                                arguments: index,
+                              );
+                            },
+                            child: CustomCardItem(
+                              title: customCardsList[index].title,
+                              subtitle: customCardsList[index].subtitle,
+                              image: customCardsList[index].image,
+                              index: index,
+                            ),
                           );
                         },
                       ),
@@ -156,23 +171,6 @@ class HomeView extends GetView<HomeController> {
                   ],
                 ),
               )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSecondScreen() {
-    return const Scaffold(
-      backgroundColor: AppColors.transparent,
-      body: BackgroundContainer(
-        child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: Stack(
-            children: [
-              BackgroundSideContainer(),
             ],
           ),
         ),

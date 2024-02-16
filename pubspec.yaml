@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   get: ^4.6.6
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -22,7 +23,8 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/svg/
   fonts:
-    - family: ArialicHollow
+    - family: NostromoOutline
       fonts:
-        - asset: assets/fonts/arialic_hollow.ttf
+        - asset: assets/fonts/NostromoOutline-Medium.otf

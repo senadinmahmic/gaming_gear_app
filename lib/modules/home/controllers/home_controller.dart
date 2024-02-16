@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final itemSelected = false.obs;
+  final animateSideContainer = false.obs;
 
-  void toggleIsItemSelected() {
-    itemSelected.value = !itemSelected.value;
+  @override
+  void onInit() {
+    animateSideContainer.value = true;
+    super.onInit();
   }
 }
