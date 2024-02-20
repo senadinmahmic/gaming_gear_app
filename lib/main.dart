@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       },
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Autoskola quiz app',
+        title: 'Gaming gear app',
         getPages: AppPages.routes,
         initialRoute: Routes.HOME,
         initialBinding: HomeBindings(),

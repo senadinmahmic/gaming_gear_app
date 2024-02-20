@@ -23,8 +23,8 @@ class CustomElevatedButton1 extends StatelessWidget {
       color: AppColors.transparent,
       child: Container(
           padding: padding,
-          height: 60,
-          width: 60,
+          height: 50,
+          width: 50,
           decoration: BoxDecoration(
             boxShadow: [boxShadow],
             gradient: const LinearGradient(

@@ -14,6 +14,7 @@ class AppPages {
       name: Routes.HOME,
       page: () => const HomeView(),
       binding: HomeBindings(),
+      transitionDuration: const Duration(milliseconds: 500),
     ),
     GetPage(
       name: Routes.ITEMDETAILS,

@@ -104,8 +104,19 @@ class CustomCardItem extends GetView<HomeController> {
                     padding: const EdgeInsets.all(18.0),
                     child: Hero(
                       tag: 'item$index',
-                      child: Image.asset(
-                        image,
+                      child: Obx(
+                        () => RotationTransition(
+                          turns: AlwaysStoppedAnimation(
+                            index == controller.clickedIndex
+                                ? controller.itemRotation.value
+                                : controller.itemRotation.value * 0.0,
+                          ),
+                          child: IgnorePointer(
+                            child: Image.asset(
+                              image,
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                   ),

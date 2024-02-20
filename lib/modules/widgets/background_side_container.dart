@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:gaming_gear_app/config/app_colors.dart';
 
@@ -17,11 +18,11 @@ class BackgroundSideContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    final currentScreen = Get.currentRoute;
 
-    return AnimatedContainer(
-      width: screenSize.width * width, //0.42,
-      height: screenSize.height * height, // 0.9,
-      duration: const Duration(milliseconds: 500),
+    return Container(
+      width: screenSize.width * width,
+      height: screenSize.height * height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(radius),
@@ -35,22 +36,31 @@ class BackgroundSideContainer extends StatelessWidget {
           ],
         ),
       ),
-      child: const FittedBox(
+      child: FittedBox(
         alignment: Alignment.topRight,
-        child: RotatedBox(
-          quarterTurns: 3,
-          child: Opacity(
-            opacity: 0.1,
-            child: Text(
-              'GAMING GEAR',
-              style: TextStyle(
-                color: AppColors.textWhite,
-                fontWeight: FontWeight.bold,
-                height: 0.8,
+        child: currentScreen == '/home'
+            ? const RotatedBox(
+                quarterTurns: 3,
+                child: Opacity(
+                  opacity: 0.1,
+                  child: Text(
+                    'GAMING GEAR',
+                    style: TextStyle(
+                      color: AppColors.textWhite,
+                      fontWeight: FontWeight.bold,
+                      height: 0.7,
+                    ),
+                  ),
+                ),
+              )
+            : Opacity(
+                opacity: 0.1,
+                child: Image.asset(
+                  'assets/images/container_background.png',
+                  color: Colors.white,
+                  fit: BoxFit.fill,
+                ),
               ),
-            ),
-          ),
-        ),
       ),
     );
   }

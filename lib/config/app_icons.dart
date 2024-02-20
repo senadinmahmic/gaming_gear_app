@@ -5,3 +5,4 @@ const String itemsIcon = 'assets/svg/items_icon.svg';
 const String menuIcon = 'assets/svg/menu_icon.svg';
 const String cartIcon = 'assets/svg/cart_icon.svg';
 const String layerIcon = 'assets/svg/layer_icon.svg';
+const String bookmarkIcon = 'assets/svg/bookmark_icon.svg';
